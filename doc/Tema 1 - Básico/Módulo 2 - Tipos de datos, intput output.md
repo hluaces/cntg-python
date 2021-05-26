@@ -29,7 +29,7 @@
 * **Booleano**: `True` y `False` .
     * La capitalización es importante. `true` o `TRUE` no son booleanos.
 * **Long**: convertido internamente por Python cuando el número es muy largo. Son flotantes sin factor decimal.
-* `NULL`
+* `None`
 
 # Operadores básicos
 

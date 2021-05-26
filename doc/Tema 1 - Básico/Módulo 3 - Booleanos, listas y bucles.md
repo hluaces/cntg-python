@@ -111,7 +111,7 @@ for par in pares:
 
 ## break y continue
 
-Tanto `while` como `for` pueden usar las sentencias `break` y `continue` para modificar el comportamiento de un bucle.
+Tanto `while` como `for` pueden usar las sentencias `break` y `continue` para modificar el comportamiento de un bucle. La sentencia `pass` sirve como _placeholder_ en un bucle, pero **no hace nada** (ni saltar la ejecución actual).
 
 ```python
 for i in range(2,100,2):
@@ -280,7 +280,7 @@ lista = [0, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Inserta un elemento al final
 lista.append(10)
-
+me refiero en el caso de querer hacer algo en la primera iteración, que es algo que hacías en el do
 # Inserta un elemento antes de un índice concreto
 lista.insert(1, 1)
 
@@ -299,6 +299,22 @@ lista_2 = lista
 del lista_2
 print(lista) # La variable "lista" sigue existiendo
 ```
+
+## Operaciones con listas
+
+Las listas pueden ser sumadas
+
+```python
+a = [1, 2, 3]
+b = [3, 4, 5]
+c = a + b # Da como resultado [1, 2, 3, 3, 4, 5]
+```
+
+También pueden ser multiplicadas
+
+```python
+a = [2, 3, 4]
+b = a * 3    # da como resultado [2, 3, 4, 2, 3, 4, 2, 3, 4]
 
 ## Ordenar listas
 
