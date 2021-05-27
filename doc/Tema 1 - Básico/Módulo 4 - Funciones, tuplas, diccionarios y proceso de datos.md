@@ -132,8 +132,103 @@ Las tuplas conservan todas las operaciones de las listas, exceptuando aquellas q
 
 # Diccionarios
 
+Los diccionarios son estructuras de datos representadas por un conjunto de _claves_ donde cada una se relaciona con un _valor_. Son mutables y, aunque no son secuencias, su conjunto de _claves_ o _valores_ pueden devolverse comotales.
 
+Las siguientes normas se aplican en diccionarios:
+
+* Las claves no pueden repetirse.
+* Las claves solo pueden ser valores numéricos o _strings_.
+
+Notas adicionales:
+
+* La función `len(<diccionario>)` devuelve el total de claves de un diccionario.
+
+Ejemplos:
+
+```python
+tortugas = {"leonardo": "azul", "donatello": "morado", "rafael": "rojo", "michelangelo": "naranja"}
+
+# Acceder a elementos
+tortugas['leonardo']  # devuelve "azul"
+tortugas['donatello'] # devuelve "morado"
+
+# Acceder a un elemento incorrecto devuelve un error
+tortugas['splinter'] # levanta un error
+
+# Una alternativa verbose
+tortugas['splinter'] if "splinter" in tortugas else None
+
+# Una menos verbose. El segundo parámetro es el valor por defecto
+tortugas.get('splinter', 'marrón')
+```
+
+## Creación desde tuplas
+
+```python
+tortugas = dict((("dontatello", "azul"), ("rafael", "rojo")))
+```
+
+## Iterar sobre diccionarios
+
+Por defecto `for` no puede iterar sobre un diccionario ya que este no es una secuencia. No obstante, sí puede iterarse sobre la secuencia de sus llaves o de sus valores.
+
+```python
+tortugas = {"leonardo": "azul", "donatello": "morado", "rafael": "rojo", "michelangelo": "naranja"}
+
+# Imprime los nombres de tortugas del diccionario
+for tortuga in tortugas.keys():
+    print(tortuga)
+
+# Imprime los colores del diccionario
+for color in tortugas.values():
+    print(color)
+
+# Itera sobre los nombres e imprime todo
+for tortuga in tortugas.keys():
+    print(tortuga + " viste el color " + tortugas[tortuga])
+
+# Podemos ordenarlo
+for tortuga in sorted(tortugas.keys()):
+    print(tortuga + " viste el color " + tortugas[tortuga])
+```
+
+Adicionalmente también puede iterarse sobre los diccionarios usando `items()`, lo que devuelve una _secuencia_ en la que cada elemento es una tupla de la clave y su valor.
+
+```python
+for tortuga, color in tortugas.items():
+    print(tortuga + " viste el color " + color)
+```
+
+## Manipular diccionarios
+
+```python
+tortugas = {"leonardo": "azul", "donatello": "morado", "rafael": "rojo", "michelangelo": "naranja"}
+
+# Modificar un elemento se hace referenciando la llave entre corchetes
+tortugas["donatello"] = "violeta"
+
+# Podemos añadir un nuevo elemento al diccionario sin problema
+tortugas.update({"splinter": "morado"})
+
+# Podemos borrar pares de llave/valor sin problemas
+del tortugas["splinter"]
+
+# También podemos borrar todo con "clear"
+tortugas.clear()
+
+# Crear copias por valor
+tortugas_copy = tortugas.copy()
+
+# Podemos obtener el último elemento con popitem()
+# OJO! versiones de Python previas a 3.6.7 devuelven un elemento al azar
+# Devuelve una tupla
+ultima, ultimo_color = tortugas.popitem()
+```
+## Ordenación
+
+Las claves, previo a Python 3.6, no están ordenadas.
 
 # Misc
 
+* `tuple(<iterable>)` devuelve una tupla desde un iterable.
 * [Lista de funciones _builtin_ de Python](https://docs.python.org/3/library/functions.html)

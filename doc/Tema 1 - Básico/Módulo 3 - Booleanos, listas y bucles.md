@@ -20,7 +20,7 @@ Cualquier operador aritmético (módulotiene más prioridad que estos elementos)
 `if` permite hacer comparaciones. Nótese que la sintáxis **requiere** indentación. 
 
 ```python
-if True then:
+if True:
     print("Es verdadero")
 else:
     print("Es falso")
@@ -372,6 +372,7 @@ Se pueden anidar para generar listas multidimensionales. Un tablero de ajedrez (
 
 # Misc
 
+* `list(<iterable>)` convierte un iterable en una lista.
 * `range(start, stop, step)` genera una secuencia de números.
 * `len(lista)` devuelve la longitud de una lista.
 * Python no permite mezclar _tabs_ y _espacios_ como indentación. 
