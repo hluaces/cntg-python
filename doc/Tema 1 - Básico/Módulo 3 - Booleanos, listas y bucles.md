@@ -2,7 +2,7 @@
 
 * **Igualdad** `==`: compara dos valores y devuelve `True` si son iguales o `False` si no.
 * **No igualdad** `!=`: compara dos valores y devuelve `True` si son distintos, o `False` si no.
-* **Comparación** (`>`, `<`, `>=`, `<=`): compara dos operandos para determinar si uno es más grande, más pequeño, mayor o igual o menor o igual, respectivamente. 
+* **Comparación** (`>`, `<`, `>=`, `<=`): compara dos operandos para determinar si uno es más grande, más pequeño, mayor o igual o menor o igual, respectivamente.
 
 Las comparaciones se hacen _por valor_, no _por referencia_.
 
@@ -17,7 +17,7 @@ Cualquier operador aritmético (módulotiene más prioridad que estos elementos)
 
 ## if
 
-`if` permite hacer comparaciones. Nótese que la sintáxis **requiere** indentación. 
+`if` permite hacer comparaciones. Nótese que la sintáxis **requiere** indentación.
 
 ```python
 if True:
@@ -126,7 +126,7 @@ for i in range(2,100,2):
 
 # Lógica booleana
 
-## and 
+## and
 
 Operador "_Y_" lógico.
 
@@ -224,13 +224,23 @@ numeros = [1, 2, 3, ["una", "lista", "interior"], 5, "hola troncos", 8.2]
 
 ## Comienzo de las listas
 
-Las listas empiezan en `0`.
+Las listas empiezan en `0`. Para acceder a un elemento de la lista se usan corchetes.
 
 ```python
 lista = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Imprime "1"
-print(str(lista[0])) 
+print(str(lista[0]))
+```
+
+Podemos obtener la posición de un elemento usando `index`:
+
+```python
+lista = ["rojo", "amarillo", "verde", "azul"]
+
+# Devuelve "2"
+# Si no existe el parámetro pasado lanzará un ValueError
+lista.index("verde")
 ```
 
 ## Longitud de las listas
@@ -241,6 +251,15 @@ Su longitud puede comprobarse con la función `len()`:
 lista = [1, 2, 3, 4, 5, 6, 7]
 
 print(len(lista)) # imprime 7
+```
+
+También pueden contarse los elementos con un valor dado, p.ej.:
+
+```python
+lista = [1, 2, 1, 1, 2, 3, 4, 5]
+
+lista.count(1) # devuelve 1
+lista.count(2) # devuelve 2
 ```
 
 ## Slices
@@ -280,9 +299,12 @@ lista = [0, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Inserta un elemento al final
 lista.append(10)
-me refiero en el caso de querer hacer algo en la primera iteración, que es algo que hacías en el do
+
 # Inserta un elemento antes de un índice concreto
 lista.insert(1, 1)
+
+# "extend" permite agregar varios elementos a una lista
+lista.extend([11, 12, 13, 14, 15])
 
 # Borra un elemento de la lista
 del(lista[9])
@@ -298,6 +320,12 @@ lista = [0, 1, 2, 3]
 lista_2 = lista
 del lista_2
 print(lista) # La variable "lista" sigue existiendo
+
+# Obtener el último elemento de la lista y quitarlo de ella
+lista.pop()
+
+# Obtener el primer elemento de la lista y quitarlo
+lista.pop(0)
 ```
 
 ## Operaciones con listas
@@ -323,6 +351,8 @@ lista = [0, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Ordenación
 lista.sort()
+lista.sort(reverse=True)
+lista.sort(reverse=False)
 
 # Esto la revierte
 lista.reverse()
@@ -362,7 +392,7 @@ Se pueden anidar para generar listas multidimensionales. Un tablero de ajedrez (
 [[0 for fila in range(8)] for columna in range(8)]
 ```
 
-# Funciones 
+# Funciones
 
 ## Funciones vs métodos
 
@@ -375,4 +405,4 @@ Se pueden anidar para generar listas multidimensionales. Un tablero de ajedrez (
 * `list(<iterable>)` convierte un iterable en una lista.
 * `range(start, stop, step)` genera una secuencia de números.
 * `len(lista)` devuelve la longitud de una lista.
-* Python no permite mezclar _tabs_ y _espacios_ como indentación. 
+* Python no permite mezclar _tabs_ y _espacios_ como indentación.
