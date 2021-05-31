@@ -70,6 +70,33 @@ def imprimir_numeros3(*, numero_1, numero_2, fin_de_linea):
 imprimir_numeros3(numero_1=3,numero_2=4,fin_de_linea=True)
 ```
 
+**Opción #4**:
+
+Se permite pasar parámetros arbitrarios como una lista, en cuyo caso sería necesario desempaquetarlo usando `*` en el parámetro que se le pasa a la función:
+
+```python
+def imprimir_numeros4(*args, fin_de_linea):
+    print(args)
+
+lista = [1, 2, 3, 4, 5, 6]
+imprimir_numeros4(*lista)
+```
+
+A esto se le conoce como _**starred expression**_.
+
+**Opción #5**:
+
+Una función puede recibir un conjunto arbitrario de parámetros normales, para lo cuales a efectos de implementación recibirá un diccionario.
+
+Para poder usar una función de este tipo será necesario especificar un único parámetro que sea un doble astrisco `**`:
+
+```python
+def imprimir_parametros(**kwargs):
+    print(kwargs)
+
+imprimir_parametros(nombre="héctor",apellidos="luaces",edad=666)
+```
+
 ## Retorno
 
 `return` puede usarse para devolver valores o salir de la función.
@@ -89,7 +116,7 @@ def modificar_var:
     print(var)
     var = 2
     print(var)
- 
+
 print(var)      # imprime "1"
 modificar_var() # imprime "1" seguido de "2"
 print(var)      # imprime "1"
@@ -97,13 +124,12 @@ print(var)      # imprime "1"
 
 Puede usarse la keyword `global` precediendo a una variable para dar escritura de una variable fuera del _scope_ de una función.
 
-
 ```python
 var = 1
 
 def modificar_var:
     global var
-    
+
     print(var)
     var = 2
     print(var)
@@ -111,6 +137,21 @@ def modificar_var:
 print(var)      # imprime "1"
 modificar_var() # imprime "1" seguido de "2"
 print(var)      # imprime "2"
+```
+
+Usar **global** sacará la variable al contexto general, no al superior. P.ej., véase este ejemplo con funciones anidadas:
+
+```python
+
+def fun():
+    x = 10:
+
+    def fun2():
+        global x
+        x = 12
+
+fun()
+print(x) # Imprimirá "12", no un "NameError"
 ```
 
 # Tuplas
