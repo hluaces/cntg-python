@@ -50,18 +50,18 @@ La forma de tratar el _Byte Order Mark_ por parte de algún software, en ocasion
 
 # Strings
 
-## Cadenas multilínea
+## Cadenas multi línea
 
-Pueden usarse tres carácteres de comilla simple (`'`) o comilla doble (`"` )consecutivos para hacer un string multilínea:
+Pueden usarse tres carácteres de comillas simple (`'`) o comillas doble (`"` )consecutivos para hacer un string multi línea:
 
 
 ```python
-text1 = """Ejemplo de comentario multilínea
+text1 = """Ejemplo de comentario multi línea
 número 1
 con comillas dobles
 """
 
-text2 = '''Ejemplo de comentario multilínea
+text2 = '''Ejemplo de comentario multi línea
 número 2
 con comillas dobles
 '''
@@ -113,7 +113,6 @@ Las cadenas en Python son inmutables. Esto implica que:
 
 ## Métodos útiles de cadenas
 
-- `capitalize()`: devuelve la cadena capitalizada.
 - `center(<anchura>)`: centra la cadena en un campo de anchura dada.
 - `endswith(<cadena>)`: determina si una cadena termina con una cadena dada.
     * También hay `startswith()`.
@@ -122,16 +121,146 @@ Las cadenas en Python son inmutables. Esto implica que:
     * Puede pasarse un segundo parámetro para revertir.
     * Puede pasarse un tercer parámetro para omitir coincidencias.
     * `rfind()` hace lo mismo, pero buscando por la derecha.
-- `isalnum()`: Devuelve `True` si solo contiene números y letras.
-- `isalpha()`: Devuelve `True` si la cadena solo contiene letras.
-- `isdigit()`: Devuelve `True` si la cadena solo contiene números.
-- `islower()` e `isupper()`.
-- `isspace()`.
+- Métodos para determinar el contenido de una cadena:
+    * `isalnum()`: Devuelve `True` si solo contiene números y letras.
+    * `isalpha()`: Devuelve `True` si la cadena solo contiene letras.
+    * `isdigit()`: Devuelve `True` si la cadena solo contiene números.
+    * `islower()` e `isupper()`.
+    * `isspace()`.
 - `join(<lista>)`: convierte una lista en una cadena usando como caracter de unión el valor de la cadena sobre la que se llame el método, p.ej.: `",".join(["1","2","3"])`.
 - `split(<delimitador>)`: separa una cadena en una lista usando el delimitador para diferenciar entre elementos.
-- `lower()` y `upper()`.
+- Métodos de capitalización:
+    * `capitalize()`.
+    * `lower()`.
+    * `upper()`.
+    * `swapcase()`.
+    * `tile()`: hace un `capitalize()` a todas las palabras de una frase.
 - `strip()`, `lstrip()` y `rstrip()`: elimina los espacios que preceden a la cadena, van después de ella o ambos.
 - `replace(<que>, <con que>)`: reemplaza una parte de la cadena con otra.
+
+## Comparación de cadenas
+
+Al compararse las cadenas con operadores lógicos (`==`, `!=`, etc.) se buscará el primer _code point_ distinto en ambas y se usará ese para la comparación.
+
+Comparar dos cadenas de longitudes distintas hará que la más larga se considere más grande.
+
+# Excepciones
+
+## Uso de try / except
+
+Las excepciones en Python pueden gestionarse con bloques `try` / `except`. Python prefiere el uso de excepciones a las constantes comprobaciones de errores, que pueden causar que el código pierda legibilidad.
+
+Un ejemplo de uso de `try` que atrapa todas las excepciones:
+
+```python
+try:
+    x = 2 / 0
+except:
+    print("Ha ocurrido un error")
+```
+
+## Múltiples excepts
+
+El problema de usar `except` para gestionar excepciones es que, en ocasiones, no podemos saber cuál se ha disparado.
+
+Hay dos formas de identificar qué excepción se lanza en un código que pueda generar más de una. La primera es usar varios bloques `except`:
+
+```python
+try:
+    a = []
+    x = 2 / len(a)
+    print(a[0])
+except ZeroDivisionError:
+    print("División entre cero")
+except IndexError:
+    print("Acceso a elemento inexistente")
+except:
+    print("Ha ocurrido una excepción no controlada")
+```
+
+La segunda es que las sentencias `except` agreguen las distintas excepciones a tratar entre paréntesis, por ejemplo:
+
+```python
+try:
+    a = []
+    x = 2 / len(a)
+    print(a[0])
+except (ZeroDivisionError, IndexError):
+    print("Ha ocurrido un error")
+```
+
+## Excepciones básicas de Python
+
+Las excepciones básicas de Python se heredan de la siguiente forma:
+
+```
+BaseException
+├── Exception
+|   ├── MemoryError
+|   ├── StandardError
+|   |   └── ImportError
+|   ├── LookupError
+|   |   ├── KeyError
+|   |   └── IndexError
+|   ├── ValueError
+|   └── ArithmeticError
+|       ├── OverflowError
+|       └── ZeroDivisionError
+├── SystemExit
+└── KeyboardInterrupt
+```
+
+A la hora de hacer _match_, los bloques `except` usarán la primera coincidencia que se encuentren entre la lista de `excepts`, teniendo en cuenta que podrán hacer match tanto en el propio nombre de la excepción como en el de cualquiera de las que hereden. P.ej.:
+
+```python
+try:
+    # Este código lanza una excepción de tipo ZeroDivisionError
+    x = 2 / 0
+# El código entrará en este bloque ya que ZeroDivisionError
+# hereda de ArithmeticError
+except ArithmeticError
+    print("Arithmetic error")
+# Este código no se ejecutará
+except ZeroDivisionError:
+    print("Zero division")
+```
+
+## Lanzar excepciones
+
+La instrucción `raise` permite lanzar una excepción si se conoce su nombre, por ejemplo:
+
+```python
+raise ZeroDivisionError('Ocurrió una división entre cero.')
+```
+
+Adicionalmente, también puede usarse sin ningún argumento siempre que esté dentro de un bloque `except`. En ese caso propagará la excepción al contexto superior.
+
+```python
+try:
+    x = 2 / 0
+except ZeroDivisionError:
+    print("Ocurrió una división entre cero.")
+
+    try:
+        x = 2 / 0
+    except ZeroDivisionError:
+        print("Ocurrió una segunda división entre cero.")
+        raise
+```
+
+En el ejemplo anterior el segundo `except` levanta una excepción. Dicha excepción no es tratada en el primer `except` por lo que el programa falla.
+
+## Aserciones
+
+La instrucción `assert` lanza una excepción `AssertionError` si la expresión que se le pase no se evalúa como `True` (o un valor _truthy_). P.ej.:
+
+```python
+try:
+    x = input("Introduce un número: ")
+    assert x.isnumeric()
+except AssertionError:
+    print("Valor inválido")
+```
 
 # Misc
 
