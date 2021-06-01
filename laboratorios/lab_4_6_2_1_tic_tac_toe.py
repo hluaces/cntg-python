@@ -139,12 +139,13 @@ def victory_for(board, sign):
     # Auxiliar de la longitud del tablero
     max_len = len(board) - 1
 
-    # Búsqueda de victoria en columnas o diagonales
+    # Búsqueda de victoria en columnas, filas o diagonales
     for column in range(0, len(board)):
         column_matched = True
 
         # Búsqueda en columnas
         for row in range(0, len(board)):
+            # La fila actual es un tres en raya en horizontal
             if board[row] == [sign, sign, sign]:
                 return True
 
