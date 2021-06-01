@@ -276,8 +276,9 @@ def main():
     player_turn = randrange(0, 2) == 1
     game_status = (False, None)
 
-    # Initial board
-    display_board(board)
+    # Initial board, only if the human player is the one moving
+    if player_turn:
+        display_board(board)
 
     # Main loop
     while not game_status[0]:
