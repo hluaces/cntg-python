@@ -273,8 +273,10 @@ lista[0:2] # devuelve [1, 2, 3]
 lista[5:]  # devuelve [6, 7]
 lista[:3]  # devuelve [1, 2, 3]
 lista[:]   # Devuelve una copia de la lista entera **POR VALOR** no referencia
+           # SALVO que sea una lista multidimensional, en cuyo caso seguirá siendo
+           # referencia.
 
-# Los índices negativos solo pueden uarse al final de ":"
+# Los índices negativos solo pueden usarse al final de ":"
 lista[0:-3] # devuelve [1, 2, 3, 4]
 ```
 
